@@ -1,0 +1,15 @@
+
+@import './vendor/slick.min.css';
+@import './vendor/bootstrap.min.css';
+@import './fonts/flaticon/flaticon.css';
+@import './fonts/font-awesome/fontawesome.css';
+/* @import './vendor/slick.min.css'; */
+/* @import './vendor/bootstrap.min.css'; */
+@import './custom/ad-post.css';
+@import './custom/main.css';
+@import './custom/index.css';
+@import './custom/user-form.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
