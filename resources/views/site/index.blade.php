@@ -61,13 +61,19 @@
             </div>
         </div> -->
         <div class="row justify-content-center">
+
+            @foreach ($agrupado as $item )
+                 
             <div class="col-md-11 col-lg-8 col-xl-6">
                 <div class="product-card standard">
                     <div class="product-media">
-                        <div class="product-img"><img src="images/product/01.jpg" alt="product"></div>
-                        <div class="cross-vertical-badge product-badge"><i
-                                class="fas fa-bolt"></i><span>trending</span></div>
-                        <div class="product-type"><span class="flat-badge booking">booking</span></div>
+                        @if(!empty($item->fotos))
+                       @php $primeiraImagem = $item->fotos[0]; $url = Storage::disk('public')->url($primeiraImagem); @endphp
+                        <div class="product-img"><img src="{{$url}}" alt="product"></div>
+                        @endif
+                        {{-- <div class="cross-vertical-badge product-badge"><i
+                                class="fas fa-bolt"></i><span>trending</span></div> --}}
+                        <div class="product-type"><span class="flat-badge sale">Venda</span></div>
                         <ul class="product-action">
                             <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
                             <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
@@ -77,15 +83,14 @@
                     <div class="product-content">
                         <ol class="breadcrumb product-category">
                             <li><i class="fas fa-tags"></i></li>
-                            <li class="breadcrumb-item"><a href="#">property</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">house</li>
+                            <li class="breadcrumb-item"><a href="#">Compra</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Venda</li>
                         </ol>
-                        <h5 class="product-title"><a href="ad-details-right.html">Lorem ipsum dolor sit amet consect
-                                adipisicing elit</a></h5>
-                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>Uttara,
-                                Dhaka</span><span><i class="fas fa-clock"></i>30 min ago</span></div>
+                        <h5 class="product-title"><a href="ad-details-right.html">{{ $item->titulo }}</a></h5>
+                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>{{ $item->cidade }}
+                        </span></div>
                         <div class="product-info">
-                            <h5 class="product-price">$974<span>/per day</span></h5>
+                            <h5 class="product-price">R$ {{ $item->preco }}<span></span></h5>
                             <div class="product-btn"><a href="compare.html" title="Compare"
                                     class="fas fa-compress"></a><button type="button" title="Wishlist"
                                     class="far fa-heart"></button></div>
@@ -93,6 +98,10 @@
                     </div>
                 </div>
             </div>
+            @endforeach
+
+
+
             <div class="col-md-11 col-lg-8 col-xl-6">
                 <div class="product-card standard">
                     <div class="product-media">
@@ -125,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-11 col-lg-8 col-xl-6">
+            {{-- <div class="col-md-11 col-lg-8 col-xl-6">
                 <div class="product-card standard">
                     <div class="product-media">
                         <div class="product-img"><img src="images/product/03.jpg" alt="product"></div>
@@ -252,7 +261,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
        
     </div>

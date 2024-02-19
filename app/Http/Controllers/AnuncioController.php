@@ -50,15 +50,9 @@ class AnuncioController extends Controller
 
     public function generatemain()
     {
-        // $perfil = DB::table('anuncio')
-        // ->join('controleanuncios', 'anuncio.id', '=', 'controleanuncios.idanuncio')
-        // ->join('fotos','fotos.idanuncio', '=', 'anuncio.id')
-        // ->select('anuncio.*', 'fotos.arquivo')
-        // ->where('controleanuncios.status', '=', 0)
-        // ->groupBy('anu')
-        // ->get();
+       
 
-        
+        $this->checkanuncio();
         $itens = DB::table('controleanuncios')
     ->join('anuncio', 'controleanuncios.idanuncio', '=', 'anuncio.id')
     ->join('fotos', 'fotos.idanuncio', '=', 'anuncio.id')
@@ -91,8 +85,8 @@ class AnuncioController extends Controller
     }
     
     
-
-        dd($agrupado);
+        
+        return view('site.index', compact('agrupado'));
     }
 
 
