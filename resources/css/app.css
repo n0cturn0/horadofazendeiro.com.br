@@ -9,7 +9,14 @@
 @import './custom/main.css';
 @import './custom/index.css';
 @import './custom/user-form.css';
+@import './custom/ad-details.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* .bg-gray-100 {
+  background-image: url("images/logo.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  } */

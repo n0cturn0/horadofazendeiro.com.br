@@ -16,6 +16,25 @@ use Illuminate\Support\Facades\Session;
 
 class AnuncioController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+        $this->validaanuncios();
+    }
+
+    private function validaanuncios()
+    {
+        $anuncios = ControleDeAnuncioModel::where('status', 0)->get();
+        foreach ($anuncios as  $value) {
+            if (Carbon::parse($value->datavencimento)->isPast()) {
+                // Atualiza o status para 1 se a data estiver vencida
+                $value->update(['status' => 1]);
+            }
+        }
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -38,9 +57,36 @@ class AnuncioController extends Controller
         if ($vencimento->isPast()) {
         $value->update(['status' => 1]);
         } elseif ($vencimento->isFuture()) {
-        echo 'A data é no futuro.<br>';
+      
         } 
         }
+    }
+
+
+    /** 
+     * 
+     * Página de detalles do anúncio
+     */
+    public function detalhe()
+    {
+
+        $agrupado = FotosModel::where('idanuncio', 59)->get();
+        // dd($agrupado);
+        // $agrupado = [];
+        // foreach ($itens as $item) {
+        //     $item = FotosModel::find($item->id);
+        //     if (!isset($agrupado[$item->id])) {
+        //         // Se ainda não existe uma entrada para este id, criamos uma nova
+        //         $agrupado[$item->id] = $item;
+        //         $agrupado[$item->id]->fotos = [];
+        //     }
+        
+        //     // Adicionamos a foto à lista de fotos deste id
+        //     $agrupado[$item->id]->fotos[] = $item->arquivo;
+        // }
+
+        // dd($agrupado);
+        return view('site.detalhe',compact('agrupado') );
     }
 
     /**
@@ -201,6 +247,14 @@ class AnuncioController extends Controller
 
     }
 
+    public function perfil(){
+        $perfil = DB::table('pacote')
+        ->join('perfil', 'pacote.id', '=', 'perfil.idpacote')
+        ->select('pacote.*')
+        ->where('perfil.idusuario', '=', auth()->id())
+        ->first();
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -212,7 +266,9 @@ class AnuncioController extends Controller
         ->select('pacote.*')
         ->where('perfil.idusuario', '=', auth()->id())
         ->get();
-        //Anuncios
+        
+        
+        
         $anuncio = PerfilControlleModel::where('idusuario', auth()->id())->first();
         return view('anuncio.store', compact('perfil','anuncio'));
     }
@@ -253,13 +309,19 @@ class AnuncioController extends Controller
 
     public function meusanuncios()
     {
-        $id=auth()->id();
-        $anuncios = DB::table('controleanuncios')
-        ->join('fotos', 'controleanuncios.idanuncio', '=', 'fotos.idanuncio')
-        ->select('controleanuncios.*','fotos.arquivo')
-        ->where('controleanuncios.idusuario', '=', auth()->id())
+      $public = DB::table('controleanuncios')
+      ->join ('anuncio', 'controleanuncios.idanuncio', '=', 'anuncio.id')
+      ->where('idusuario','=',auth()->id())
+      ->get();
+    //   dd($public);
+
+        $perfil = DB::table('pacote')
+        ->join('perfil', 'pacote.id', '=', 'perfil.idpacote')
+        ->select('pacote.*')
+        ->where('perfil.idusuario', '=', auth()->id())
         ->get();
-        dd($anuncios);
+        $anuncio = PerfilControlleModel::where('idusuario', auth()->id())->first();
+        return view('anuncio.list', compact('perfil','anuncio','public'));
        
     }
 

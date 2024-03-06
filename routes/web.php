@@ -77,6 +77,8 @@ Route::get('/anuncio/teste/', [App\Http\Controllers\AnuncioController::class, 'c
 ->name('anuncio-teste');
 Route::get('/anuncio/principal/', [App\Http\Controllers\AnuncioController::class, 'generatemain'])
 ->name('anuncio-principal');
+Route::get('/anuncio/detalhe/', [App\Http\Controllers\AnuncioController::class, 'detalhe'])
+->name('anuncio-detalhe');
 //Pacote
 Route::get('/pacote/', [App\Http\Controllers\PacoteController::class, 'index'])
 ->name('pacote');
@@ -91,7 +93,7 @@ Route::get('/pacote/{id}', [App\Http\Controllers\PacoteController::class, 'pacot
 Route::post('/pacote/pagamento', [App\Http\Controllers\PacoteController::class, 'payment'])
 ->name('pacote-pagamento');
 
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
 //Template
 Route::get('/template', [App\Http\Controllers\TemplateController::class, 'index'])
 ->name('template');
@@ -101,6 +103,6 @@ Route::get('formulario', [App\Http\Controllers\TemplateController::class, 'formu
 ->name('formulario');
 Route::get('profiletemp', [App\Http\Controllers\TemplateController::class, 'profiletemp'])
 ->name('profiletemp');
-});
+// });
 
 

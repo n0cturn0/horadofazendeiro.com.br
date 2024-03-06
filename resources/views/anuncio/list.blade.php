@@ -24,6 +24,9 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="dash-header-right">
+                        
+
+                       
                            @foreach ($perfil as $value ) 
                             @if ($value->id==4)
                             <div class="dash-focus dash-rev">
@@ -66,8 +69,61 @@
                 </div>
             </div>
         </div>
+
+
+
+            <div class="container">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Data de criação</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Data de expiração</th>
+                        <th scope="col">Fotos</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ( $public as $value )
+                            
+                       
+                      <tr>
+                        <th scope="row">{{ $value->id }}</th>
+                        <td>{{ \Carbon\Carbon::parse($value->datacriacao)->format('d-m-Y') }}
+                        </td>
+                        <td>{{ $value->titulo }}</td>
+                        <td>{{ \Carbon\Carbon::parse($value->datavencimento)->format('d-m-Y') }}</td>
+                        <td>Ver</td>
+                        <td>
+                            @php
+                                $status = ($value->status == 1) ? "Expirado" : "Ativo";
+                             echo $status;
+                            @endphp
+                        </td>
+                      </tr>
+                     
+                    </tbody>
+                    @endforeach
+                  </table>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+    
 </section>
-@include('anuncio.formulario-anuncio')
+
 @endsection
    

@@ -66,11 +66,12 @@
                  
             <div class="col-md-11 col-lg-8 col-xl-6">
                 <div class="product-card standard">
+                   
                     <div class="product-media">
-                        @if(!empty($item->fotos))
-                       @php $primeiraImagem = $item->fotos[0]; $url = Storage::disk('public')->url($primeiraImagem); @endphp
+                      
+                       @php $primeiraImagem = $item['arquivo']; $url = Storage::disk('public')->url($primeiraImagem); @endphp
                         <div class="product-img"><img src="{{$url}}" alt="product"></div>
-                        @endif
+                      
                         {{-- <div class="cross-vertical-badge product-badge"><i
                                 class="fas fa-bolt"></i><span>trending</span></div> --}}
                         <div class="product-type"><span class="flat-badge sale">Venda</span></div>
@@ -86,11 +87,11 @@
                             <li class="breadcrumb-item"><a href="#">Compra</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Venda</li>
                         </ol>
-                        <h5 class="product-title"><a href="ad-details-right.html">{{ $item->titulo }}</a></h5>
-                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>{{ $item->cidade }}
+                        <h5 class="product-title"><a href="{{ url('anuncio/detalhe') }}">{{ $item['titulo'] }}</a></h5>
+                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>{{ $item['cidade'] }}
                         </span></div>
                         <div class="product-info">
-                            <h5 class="product-price">R$ {{ $item->preco }}<span></span></h5>
+                            <h5 class="product-price">R$ {{ $item['preco'] }}<span></span></h5>
                             <div class="product-btn"><a href="compare.html" title="Compare"
                                     class="fas fa-compress"></a><button type="button" title="Wishlist"
                                     class="far fa-heart"></button></div>
@@ -134,134 +135,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-md-11 col-lg-8 col-xl-6">
-                <div class="product-card standard">
-                    <div class="product-media">
-                        <div class="product-img"><img src="images/product/03.jpg" alt="product"></div>
-                        <div class="cross-vertical-badge product-badge"><i
-                                class="fas fa-bolt"></i><span>trending</span></div>
-                        <div class="product-type"><span class="flat-badge sale">sale</span></div>
-                        <ul class="product-action">
-                            <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
-                            <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
-                            <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li>
-                        </ul>
-                    </div>
-                    <div class="product-content">
-                        <ol class="breadcrumb product-category">
-                            <li><i class="fas fa-tags"></i></li>
-                            <li class="breadcrumb-item"><a href="#">stationary</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">book</li>
-                        </ol>
-                        <h5 class="product-title"><a href="ad-details-right.html">Lorem ipsum dolor sit amet consect
-                                adipisicing elit</a></h5>
-                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>Uttara,
-                                Dhaka</span><span><i class="fas fa-clock"></i>30 min ago</span></div>
-                        <div class="product-info">
-                            <h5 class="product-price">$78<span>/Negotiable</span></h5>
-                            <div class="product-btn"><a href="compare.html" title="Compare"
-                                    class="fas fa-compress"></a><button type="button" title="Wishlist"
-                                    class="far fa-heart"></button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-11 col-lg-8 col-xl-6">
-                <div class="product-card standard">
-                    <div class="product-media">
-                        <div class="product-img"><img src="images/product/04.jpg" alt="product"></div>
-                        <div class="cross-vertical-badge product-badge"><i
-                                class="fas fa-bolt"></i><span>trending</span></div>
-                        <div class="product-type"><span class="flat-badge sale">sale</span></div>
-                        <ul class="product-action">
-                            <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
-                            <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
-                            <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li>
-                        </ul>
-                    </div>
-                    <div class="product-content">
-                        <ol class="breadcrumb product-category">
-                            <li><i class="fas fa-tags"></i></li>
-                            <li class="breadcrumb-item"><a href="#">electronics</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">television</li>
-                        </ol>
-                        <h5 class="product-title"><a href="ad-details-right.html">Lorem ipsum dolor sit amet consect
-                                adipisicing elit</a></h5>
-                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>Uttara,
-                                Dhaka</span><span><i class="fas fa-clock"></i>30 min ago</span></div>
-                        <div class="product-info">
-                            <h5 class="product-price">$756<span>/fixed</span></h5>
-                            <div class="product-btn"><a href="compare.html" title="Compare"
-                                    class="fas fa-compress"></a><button type="button" title="Wishlist"
-                                    class="far fa-heart"></button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-11 col-lg-8 col-xl-6">
-                <div class="product-card standard">
-                    <div class="product-media">
-                        <div class="product-img"><img src="images/product/05.jpg" alt="product"></div>
-                        <div class="cross-vertical-badge product-badge"><i
-                                class="fas fa-bolt"></i><span>trending</span></div>
-                        <div class="product-type"><span class="flat-badge sale">sale</span></div>
-                        <ul class="product-action">
-                            <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
-                            <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
-                            <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li>
-                        </ul>
-                    </div>
-                    <div class="product-content">
-                        <ol class="breadcrumb product-category">
-                            <li><i class="fas fa-tags"></i></li>
-                            <li class="breadcrumb-item"><a href="#">gadget</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">headphone</li>
-                        </ol>
-                        <h5 class="product-title"><a href="ad-details-right.html">Lorem ipsum dolor sit amet consect
-                                adipisicing elit</a></h5>
-                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>Uttara,
-                                Dhaka</span><span><i class="fas fa-clock"></i>30 min ago</span></div>
-                        <div class="product-info">
-                            <h5 class="product-price">$245<span>/Negotiable</span></h5>
-                            <div class="product-btn"><a href="compare.html" title="Compare"
-                                    class="fas fa-compress"></a><button type="button" title="Wishlist"
-                                    class="far fa-heart"></button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-11 col-lg-8 col-xl-6">
-                <div class="product-card standard">
-                    <div class="product-media">
-                        <div class="product-img"><img src="images/product/06.jpg" alt="product"></div>
-                        <div class="cross-vertical-badge product-badge"><i
-                                class="fas fa-bolt"></i><span>trending</span></div>
-                        <div class="product-type"><span class="flat-badge rent">rent</span></div>
-                        <ul class="product-action">
-                            <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
-                            <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
-                            <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li>
-                        </ul>
-                    </div>
-                    <div class="product-content">
-                        <ol class="breadcrumb product-category">
-                            <li><i class="fas fa-tags"></i></li>
-                            <li class="breadcrumb-item"><a href="#">automobile</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">cycle</li>
-                        </ol>
-                        <h5 class="product-title"><a href="ad-details-right.html">Lorem ipsum dolor sit amet consect
-                                adipisicing elit</a></h5>
-                        <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>Uttara,
-                                Dhaka</span><span><i class="fas fa-clock"></i>30 min ago</span></div>
-                        <div class="product-info">
-                            <h5 class="product-price">$75<span>/per hour</span></h5>
-                            <div class="product-btn"><a href="compare.html" title="Compare"
-                                    class="fas fa-compress"></a><button type="button" title="Wishlist"
-                                    class="far fa-heart"></button></div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+           
         </div>
        
     </div>
@@ -274,7 +148,7 @@
             <div class="col-lg-12">
                 <div class="section-center-heading">
                     <!-- <h2>Do you have something to advertise?</h2> -->
-                    <p>Conduzindo o futuro do agronegócio, um boi de cada vez. Encontre seu parceiro ideal no pasto virtual dos negócios!</p>
+                    <p style="color: #e1e8f5; font-size: 30px; font-weight: bold;  margin-bottom: 20px;">Conduzindo o futuro do agropecuária, um boi de cada vez. Encontre seu parceiro ideal no pasto virtual dos negócios!</p>
                 </div>
             </div>
         </div>
@@ -285,7 +159,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-center-heading">
-                    <h1 style="color: #0044bb; font-size: 60px; font-weight: bold; text-align: center; margin-bottom: 20px;">Escolha um plano, para assinar</h1>
+                    <h1 style="color: #0044bb; font-size: 60px; font-weight: bold; text-align: center; margin-bottom: 1px;">ASSINE AGORA
 
                 </div>
             </div>
@@ -293,7 +167,7 @@
         <div class="row">
             <div class="col-md-6 col-lg-4">
                 <div class="price-card">
-                    <div class="price-head"><i class="flaticon-bicycle"></i>
+                    <div class="price-head">
                         <h3>$00</h3>
                         <h4>Assinatura  livre</h4>
                     </div>
@@ -315,12 +189,12 @@
                         </li> -->
                     </ul>
                     <div class="price-btn"><a href="user-form.html" class="btn btn-inline"><i
-                                class="fas fa-sign-in-alt"></i><span>Register Now</span></a></div>
+                                class="fas fa-sign-in-alt"></i><span>Anúncie grátis</span></a></div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="price-card price-active">
-                    <div class="price-head"><i class="flaticon-car-wash"></i>
+                    <div class="price-head">
                         <h3>$23</h3>
                         <h4>Assinatura Bronze</h4>
                     </div>
@@ -347,7 +221,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="price-card">
-                    <div class="price-head"><i class="flaticon-airplane"></i>
+                    <div class="price-head">
                         <h3>$49</h3>
                         <h4>Assinatura Ouro</h4>
                     </div>
