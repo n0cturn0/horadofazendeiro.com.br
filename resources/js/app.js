@@ -1,15 +1,16 @@
-
-import './vendor/jquery-1.12.4.min.js';
+import "./add.js";
+import "./vendor/jquery-1.12.4.min.js";
 // import './popper.min.js';
-import './bootstrap.min.js';
-import './vendor/slick.min.js';
-import './slick.js';
-import './custom/main.js';
-import './bootstrap';
+import "./bootstrap.min.js";
+import "./vendor/slick.min.js";
+import "./slick.js";
+import "./custom/main.js";
+import "./bootstrap";
+import "./hfazendeiro.js";
+//IMPORT NOVO LAYOUT
 
-
-import Swal from 'sweetalert2/dist/sweetalert2.js';
-import Alpine from 'alpinejs';
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import Alpine from "alpinejs";
 
 window.Alpine = Alpine;
 

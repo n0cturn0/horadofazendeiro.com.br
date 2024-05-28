@@ -1,18 +1,25 @@
-
-@import './vendor/slick.min.css';
-@import './vendor/bootstrap.min.css';
-@import './fonts/flaticon/flaticon.css';
-@import './fonts/font-awesome/fontawesome.css';
+@import "./vendor/slick.min.css";
+@import "./vendor/bootstrap.min.css";
+@import "./fonts/flaticon/flaticon.css";
+@import "./fonts/font-awesome/fontawesome.css";
 /* @import './vendor/slick.min.css'; */
 /* @import './vendor/bootstrap.min.css'; */
-@import './custom/ad-post.css';
-@import './custom/main.css';
-@import './custom/index.css';
-@import './custom/user-form.css';
-@import './custom/ad-details.css';
+@import "./custom/ad-post.css";
+@import "./custom/main.css";
+@import "./custom/index.css";
+@import "./custom/user-form.css";
+@import "./custom/ad-details.css";
+@import "./custom/blog-details.css";
+@import "select2/dist/css/select2.min.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* NOVO LAYOUT */
+@import "./novo2/application-b810806e416ea3457c4deeea7c836b1a9af56599736dfbc366794e409d56bfde.css";
+@import "./novo2/article-1920c26607f361958a333b0a02c099f3d1065161c9e92c2bb4bc3b3bddc1dfed.css";
+@import "./novo2/crawled_featured_auction_card-a7b390a11208542e691dd4df007c3e2f9ae23c2844762a801549e1e66d560b8f.css";
+@import "./novo2/index-7588b82bf51466d9e56477f98e0093ee525ed6e3be26ee4d7278e7147f1aa9ec.css";
+@import "./novo2/product-c195428572d35e0e147f86261e974724314ac2f74c138dd1ed79721a4e4a303d.css";
 
 /* .bg-gray-100 {
   background-image: url("images/logo.png");
