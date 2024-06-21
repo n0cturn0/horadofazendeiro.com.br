@@ -29,7 +29,10 @@
           </div>
           <label>Enviar Video</label>
           <input type="file"
-                 name="video">
+                 name="video"><br><br>
+
+          <button class="btn btn-inline btn-sm"><i class="material-icons">videocam</i><span> Atualizar Vídeo</span></button>
+
 
 
 
@@ -45,9 +48,31 @@
                  class="view"><i class="fas fa-arrow-left"></i><span><strong></strong>Voltar</span></a>
             </div>
 
+            <form id="formularioAnuncio"
+                  method="post"
+                  action="{{ route('anuncio-edit-foto') }} "
+                  enctype="multipart/form-data">
+              @csrf
+              <div class="ad-details-slider-group">
+                <div class="ad-details-slider slider-arrow">
+                  @foreach ($fotos as $foto)
+                    @if (!empty($foto->arquivo))
+                      @php
+                        $primeiraImagem = $foto->arquivo;
+                        $url = Storage::disk('public')->url($primeiraImagem);
+                      @endphp
+                      <div><img src="{{ $url }}"
+                             alt="details"></div>
+                    @endif
+                  @endforeach
 
-            <div class="ad-details-slider-group">
-              <div class="ad-details-slider slider-arrow">
+
+
+                </div>
+                <div class="cross-vertical-badge ad-details-badge"><i
+                     class="fas fa-clipboard-check"></i><span>recommend</span></div>
+              </div>
+              <div class="ad-thumb-slider">
                 @foreach ($fotos as $foto)
                   @if (!empty($foto->arquivo))
                     @php
@@ -55,34 +80,23 @@
                       $url = Storage::disk('public')->url($primeiraImagem);
                     @endphp
                     <div><img src="{{ $url }}"
-                           alt="details"></div>
+                           alt="details"><a href="{{ url('anuncio/deletefoto/' . $foto->id) }}"
+                         class="modal-link">Remover imagem</a></div>
                   @endif
                 @endforeach
 
-
-
               </div>
-              <div class="cross-vertical-badge ad-details-badge"><i
-                   class="fas fa-clipboard-check"></i><span>recommend</span></div>
-            </div>
-            <div class="ad-thumb-slider">
-              @foreach ($fotos as $foto)
-                @if (!empty($foto->arquivo))
-                  @php
-                    $primeiraImagem = $foto->arquivo;
-                    $url = Storage::disk('public')->url($primeiraImagem);
-                  @endphp
-                  <div><img src="{{ $url }}"
-                         alt="details"><a href="{{ url('anuncio/deletefoto/' . $foto->id) }}"
-                       class="modal-link">Remover imagem</a></div>
-                @endif
-              @endforeach
+              <label>Enviar fotos</label><br>
+              <input type="file"><br><br>
+              <button class="btn btn-inline btn-sm"><i class="material-icons">camera_alt</i><span>Atualizar
+                  fotos</span></button>
 
-            </div>
-            <label>Enviar fotos</label><br>
-            <input type="file">
 
           </div>
+          </form>
+
+
+
           <div class="common-card">
             @if ($anuncio['controle'] == 1)
               <ul class="blog-details-meta blink">

@@ -80,6 +80,9 @@ Route::middleware('auth')->group(
             ->name('anuncio-editar');
         Route::get('/anuncio/deletefoto/{id}', [App\Http\Controllers\AnuncioController::class, 'deletefoto'])
             ->name('anuncio-apagafoto');
+
+        Route::POST('/anuncio/editfoto/', [App\Http\Controllers\AnuncioController::class, 'editfoto'])
+            ->name('anuncio-edit-foto');
     }
 );
 //Pacote

@@ -176,6 +176,10 @@ class AnuncioController extends Controller
         }
     }
 
+
+    public function atualizafoto($id = NULL)
+    {
+    }
     public function create(AnuncioFormRequest $request)
     {
         // $anuncio = $repository->add($request);
@@ -374,6 +378,11 @@ class AnuncioController extends Controller
         $anuncio = $this->getAnuncioComUsuario($id);
         // dd($fotos, $anuncio);
         return view('anuncio.detalhe', compact('fotos', 'anuncio'));
+    }
+
+    public function editfoto()
+    {
+        dd($_POST);
     }
 
     /**

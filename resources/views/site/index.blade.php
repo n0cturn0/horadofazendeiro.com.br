@@ -4,7 +4,7 @@
     <div class="container">
       <div class="header-content">
         <div class="header-left"><a href="#"
-             class="header-logo">horadofazendeiro.com.br</a><a href="user-form.html"
+             class="header-logo">horadofazendeiro.com.br</a><a href="{{ route('login') }}"
              class="header-widget header-user"></a><button type="button"
                   class="header-widget search-btn"><i class="fas fa-search"></i></button></div>
         <form class="header-form">
@@ -41,20 +41,21 @@
 
   <nav class="mobile-nav">
     <div class="container">
-      <div class="mobile-group"><a href="index.html"
+      <div class="mobile-group"><a href=""
            class="mobile-widget">
           <i class="fas fa-home"></i><span>Principal</span></a>
         <a href="{{ route('login') }}"
            class="mobile-widget plus-btn"><i class="fas fa-plus"></i><span>Anunciar</span></a>
-        <a href="user-form.html"
+        <a href="{{ route('login') }}"
            class="mobile-widget">
           <i class="fas fa-user"></i><span>Entrar</span></a>
         <!-- <a
-                                                                                                                                                                                                                                                                            href="notification.html" class="mobile-widget"><i
-                                                                                                                                                                                                                                                                                class="fas fa-bell"></i><span>notify</span><sup>0</sup></a> -->
+                                                                                                                                                                                                                                                                                                                                                      href="notification.html" class="mobile-widget"><i
+                                                                                                                                                                                                                                                                                                                                                          class="fas fa-bell"></i><span>notify</span><sup>0</sup></a> -->
         <!-- <a href="message.html"
-                                                                                                                                                                                                                                                                            class="mobile-widget"><i class="fas fa-envelope"></i><span>message</span><sup>0</sup></a></div> -->
+                                                                                                                                                                                                                                                                                                                                                      class="mobile-widget"><i class="fas fa-envelope"></i><span>message</span><sup>0</sup></a></div> -->
       </div>
+    </div>
   </nav>
   @include('site.single-banner')
 
@@ -63,115 +64,86 @@
   <section class="section trend-part">
 
 
-    <div class="row justify-content-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        @foreach ($anuncios as $id => $item)
+          <div class="col-md-11 col-lg-8 col-xl-6"
+               style="padding-bottom: 3px;">
 
 
 
-      @foreach ($anuncios as $id => $item)
-        <div class="col-md-11 col-lg-8 col-xl-6"
-             style="padding-bottom: 3px;">
-          <div class="product-card
+            <div class="product-card
                standard">
 
-            <div class="product-media">
-              @if (count($item['fotos']) > 0)
-                @foreach ($item['fotos'] as $foto)
-                  @php
-                    $primeiraImagem = $foto->arquivo ?? null;
-                    $url = $primeiraImagem ? Storage::disk('public')->url($primeiraImagem) : null;
-                  @endphp
-                @endforeach
-              @endif
+              <div class="product-media">
+                @if (count($item['fotos']) > 0)
+                  @foreach ($item['fotos'] as $foto)
+                    @php
+                      $primeiraImagem = $foto->arquivo ?? null;
+                      $url = $primeiraImagem ? Storage::disk('public')->url($primeiraImagem) : null;
+                    @endphp
+                  @endforeach
+                @endif
+
+
+                <div class="product-img">
+                  <a href="{{ url('site/detalhe/' . $item['anuncio']->id) }}">
+                    <img src="{{ $url }}"
+                         alt="product"> </a>
+                </div>
 
 
 
 
 
 
-
-              <div class="product-img"><img src="{{ $url }}"
-                     alt="product"></div>
-
-
-
-
-
-              {{-- <div class="cross-vertical-badge product-badge"><i
+                {{-- <div class="cross-vertical-badge product-badge"><i
                                 class="fas fa-bolt"></i><span>trending</span></div> --}}
-              <div class="product-type"><span class="flat-badge sale">Venda</span></div>
-              <ul class="product-action">
-                <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
-                <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
-                <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li>
-              </ul>
-            </div>
-            <div class="product-content">
-              <ol class="breadcrumb product-category">
-                <li><i class="fas fa-tags"></i></li>
-                <li class="breadcrumb-item"><a href="#">Compra</a></li>
-                <li class="breadcrumb-item active"
-                    aria-current="page">Venda</li>
-              </ol>
-              <h5 class="product-title"><a
-                   href="{{ url('site/detalhe/' . $item['anuncio']->id) }}">{{ $item['anuncio']->titulo }}</a></h5>
-              <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>{{ $item['anuncio']->cidade }}
-                </span></div>
-              <div class="product-info">
-                <h5 class="product-price">R$ {{ $item['anuncio']->preco }}<span></span></h5>
-                <div class="product-btn"><a href="compare.html"
-                     title="Compare"
-                     class="fas fa-compress"></a><button type="button"
-                          title="Wishlist"
-                          class="far fa-heart"></button></div>
+                {{-- <div class="product-type"><span class="flat-badge sale">Venda</span></div> --}}
+                <ul class="product-action">
+                  {{-- <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
+                  <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
+                  <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li> --}}
+                </ul>
+              </div>
+              <div class="product-content">
+                <ol class="breadcrumb product-category">
+                  <li><i class="fas fa-tags"></i></li>
+                  {{-- <li class="breadcrumb-item"><a href="#">Compra</a></li> --}}
+                  <li class="breadcrumb-item active"
+                      aria-current="page">Venda Direta</li>
+                </ol>
+                <h5 class="product-title"><a
+                     href="{{ url('site/detalhe/' . $item['anuncio']->id) }}">{{ $item['anuncio']->titulo }}</a></h5>
+                <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>{{ $item['anuncio']->cidade }}
+                  </span></div>
+                <div class="product-info">
+                  <h5 class="product-price">R$ {{ $item['anuncio']->preco }}<span></span></h5>
+                  {{-- <div class="product-btn"><a href="compare.html"
+                       title="Compare"
+                       class="fas fa-compress"></a><button type="button"
+                            title="Wishlist"
+                            class="far fa-heart"></button></div> --}}
+                </div>
               </div>
             </div>
+
           </div>
-        </div>
-      @endforeach
+        @endforeach
 
 
 
-      <div class="col-md-11 col-lg-8 col-xl-6">
-        <div class="product-card standard">
-          <div class="product-media">
-            <div class="product-img"><img src="images/product/02.jpg"
-                   alt="product"></div>
-            <div class="cross-vertical-badge product-badge"><i class="fas fa-bolt"></i><span>trending</span></div>
-            <div class="product-type"><span class="flat-badge sale">sale</span></div>
-            <ul class="product-action">
-              <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
-              <li class="click"><i class="fas fa-mouse"></i><span>134</span></li>
-              <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li>
-            </ul>
-          </div>
-          <div class="product-content">
-            <ol class="breadcrumb product-category">
-              <li><i class="fas fa-tags"></i></li>
-              <li class="breadcrumb-item"><a href="#">fashion</a></li>
-              <li class="breadcrumb-item active"
-                  aria-current="page">shoes</li>
-            </ol>
-            <h5 class="product-title"><a href="ad-details-right.html">Lorem ipsum dolor sit amet consect
-                adipisicing elit</a></h5>
-            <div class="product-meta"><span><i class="fas fa-map-marker-alt"></i>Uttara,
-                Dhaka</span><span><i class="fas fa-clock"></i>30 min ago</span></div>
-            <div class="product-info">
-              <h5 class="product-price">$384<span>/fixed</span></h5>
-              <div class="product-btn"><a href="compare.html"
-                   title="Compare"
-                   class="fas fa-compress"></a><button type="button"
-                        title="Wishlist"
-                        class="far fa-heart"></button></div>
-            </div>
-          </div>
-        </div>
+
       </div>
 
-
-
     </div>
 
-    </div>
+
+
+
+
+
+
   </section>
 
 
@@ -212,17 +184,17 @@
                   <p>{{ $itemPacote->quantidade }} Anúncios</p>
                 </li>
                 <!-- <li><i class="fas fa-times"></i>
-                                                                                                                                                                                                                                                                                        <p>Grátis</p>
-                                                                                                                                                                                                                                                                                    </li> -->
+                                                                                                                                                                                                                                                                                                                                                                  <p>Grátis</p>
+                                                                                                                                                                                                                                                                                                                                                              </li> -->
                 <li><i class="fas fa-times"></i>
                   <p>Válido por {{ $itemPacote->diasativos }} dias</p>
                 </li>
                 <!-- <li><i class="fas fa-times"></i> -->
                 <!-- <p>No Ad will be bumped up</p>
-                                                                                                                                                                                                                                                                                    </li>
-                                                                                                                                                                                                                                                                                    <li><i class="fas fa-plus"></i>
-                                                                                                                                                                                                                                                                                        <p>Limited Support</p>
-                                                                                                                                                                                                                                                                                    </li> -->
+                                                                                                                                                                                                                                                                                                                                                              </li>
+                                                                                                                                                                                                                                                                                                                                                              <li><i class="fas fa-plus"></i>
+                                                                                                                                                                                                                                                                                                                                                                  <p>Limited Support</p>
+                                                                                                                                                                                                                                                                                                                                                              </li> -->
               </ul>
               <div class="price-btn"><a href="{{ route('login') }}"
                    class="btn btn-inline"><i class="fas fa-sign-in-alt"></i><span>Anúncie grátis</span></a></div>

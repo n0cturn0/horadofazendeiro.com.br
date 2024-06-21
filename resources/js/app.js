@@ -1,4 +1,4 @@
-import "./add.js";
+//import "./add.js";
 import "./vendor/jquery-1.12.4.min.js";
 // import './popper.min.js';
 import "./bootstrap.min.js";

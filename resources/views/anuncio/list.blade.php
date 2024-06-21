@@ -55,11 +55,38 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="dash-menu-list">
-              <ul>
-                @include('perfil.menu')
-              </ul>
-            </div>
+            <nav class="bg-white shadow-md rounded-lg"
+                 x-data="{ open: false }">
+              <div class="flex items-center justify-between px-4 py-3">
+                <div class="text-xl font-semibold">Menu</div>
+                <div class="lg:hidden">
+                  <button @click="open = !open"
+                          class="text-gray-500 focus:outline-none focus:text-gray-600">
+                    <svg class="w-6 h-6"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="hidden lg:block">
+                  <ul class="flex space-x-4">
+                    @include('perfil.menu')
+                  </ul>
+                </div>
+              </div>
+              <div :class="{ 'block': open, 'hidden': !open }"
+                   class="lg:hidden">
+                <ul class="px-2 pb-4">
+                  @include('perfil.menu')
+                </ul>
+              </div>
+            </nav>
           </div>
         </div>
       </div>
@@ -71,10 +98,10 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Data de criação</th>
-                    <th scope="col">Título</th>
-                    <th scope="col">Data de expiração</th>
+                    {{-- <th scope="col">#</th> --}}
+                    {{-- <th scope="col">Data de criação</th> --}}
+                    <th scope="col">Título do anúncio</th>
+                    {{-- <th scope="col">Data de expiração</th> --}}
                     <th scope="col">Fotos</th>
                     <th>Status</th>
                   </tr>
@@ -82,18 +109,31 @@
                 <tbody>
                   @foreach ($public as $value)
                     <tr>
-                      <th scope="row">{{ $value->id }}</th>
-                      <td>{{ \Carbon\Carbon::parse($value->datacriacao)->format('d-m-Y') }}
+                      {{-- <th scope="row">{{ $value->id }}</th> --}}
+                      {{-- <td>{{ \Carbon\Carbon::parse($value->datacriacao)->format('d-m-Y') }} --}}
                       </td>
-                      <td>{{ $value->titulo }}</td>
-                      <td>{{ \Carbon\Carbon::parse($value->datavencimento)->format('d-m-Y') }}</td>
-                      <td><a href="{{ url('anuncio/editar/' . $value->id) }}">Ver</a></td>
+                      <td>
+                        <a href="{{ url('anuncio/editar/' . $value->id) }}">
+                          {{ $value->titulo }} </a>
+                      </td>
+                      {{-- <td>{{ \Carbon\Carbon::parse($value->datavencimento)->format('d-m-Y') }}</td> --}}
+                      <td><a href="{{ url('anuncio/editar/' . $value->id) }}"><i class="material-icons">camera_alt</i></a>
+
+                      </td>
                       <td>
                         @php
-                          $status = $value->status == 1 ? 'Expirado' : 'Ativo';
+                          $status =
+                              $value->status == 1
+                                  ? '<span title="Expirado em ' .
+                                      \Carbon\Carbon::parse($value->datavencimento)->format('d-m-Y') .
+                                      '"><i class="material-icons text-red-500">cancel</i></span>'
+                                  : '<span title="Ativo até ' .
+                                      \Carbon\Carbon::parse($value->datavencimento)->format('d-m-Y') .
+                                      '"><i class="material-icons text-green-500">check_circle</i></span>';
                           echo $status;
                         @endphp
                       </td>
+
                     </tr>
 
                 </tbody>
